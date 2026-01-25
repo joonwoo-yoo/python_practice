@@ -231,4 +231,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Ignoring Sandbox folder
+sandbox/
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,vim,jupyternotebooks
