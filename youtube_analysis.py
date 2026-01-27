@@ -119,3 +119,13 @@ plt.show()
 
 # 변수 간 관계 확인
 # %%
+corr = data.corr(numeric_only=True)
+mask = np.ones_like(corr, dtype=bool)
+mask = np.triu(mask)
+
+plt.figure(figsize=(13, 10))
+sns.heatmap(data=corr, annot=True, fmt=".2f", mask=mask, linewidths=.5, cmap="RdYlBu_r")
+plt.title("Correlation Matrix")
+plt.show()
+
+# %%
