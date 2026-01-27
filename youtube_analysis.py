@@ -94,10 +94,10 @@ plt.show()
 
 # %%
 # 이상치 제거를 위한 분위수 확인 (유튜버 분석이기에 이상치는 언제든 존재할 수있음)
-Q3 = data["lowest_monthly_earnings"].quantile(q=0.75)
-Q1 = data["lowest_monthly_earnings"].quantile(q=0.25)
-IQR = Q3 - Q1
-print(f"[Quantile 25% = {Q1}] \n[Quantile 75% = {Q3}] \n[IQR = {IQR}]")
+# Q3 = data["lowest_monthly_earnings"].quantile(q=0.75)
+# Q1 = data["lowest_monthly_earnings"].quantile(q=0.25)
+# IQR = Q3 - Q1
+# print(f"[Quantile 25% = {Q1}] \n[Quantile 75% = {Q3}] \n[IQR = {IQR}]")
 
 # %%
 sns.histplot(data=data, x=target_feature, kde=True)
@@ -107,4 +107,15 @@ plt.show()
 sns.histplot(data=data, x=target_feature, log_scale=(False, True))     # 출력이 왜 안되는지 확인
 plt.show()
 
+# %%
+category_feature = "category"                   # x 축
+target_feature = "lowest_monthly_earnings"      # y 축
+
+barplot = sns.barplot(data=data, x=category_feature, y=target_feature, color="C0", errorbar=None)
+loc, labels = plt.xticks()
+barplot.set_xticklabels(labels, rotation=90)
+plt.title("Lowest Monthly Earnings per Each Category", pad=15)
+plt.show()
+
+# 변수 간 관계 확인
 # %%
