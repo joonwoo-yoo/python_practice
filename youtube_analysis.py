@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sklearn.datasets as D
+from sklearn.preprocessing import scale
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 # %%
 data = pd.read_csv("./data/Global YouTube Statistics.csv", encoding="latin1")
@@ -129,3 +131,77 @@ plt.title("Correlation Matrix")
 plt.show()
 
 # %%
+indices_to_keep = data.isnull().sum(axis=1) < 8
+
+data_original = data
+data = data[indices_to_keep].copy()
+print(f"데이터 샘플 수 변화 = {len(data_original)} -> {len(data)}")
+data["subscribers_for_last_30_days"].fillna(0, inplace=True)
+data.dropna(axis=0, inplace=True)
+print(f"처리 완료 후 데이터 샘플 수 = {len(data)}")
+
+data.isnull().sum()
+
+# %%
+data
+# %%
+target_feature = "lowest_monthly_earnings"
+data[f'log_{target_feature}'] = scale(np.log(data[target_feature] + 1))
+data[f'log_{target_feature}'].describe()
+
+# %%
+data[[target_feature, f"log_{target_feature}"]].describe()
+# %%
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(15, 6))
+
+sns.histplot(data=data, x=target_feature, kde=True, ax=ax[0])
+ax[0].set_title("Before Log Transformation")
+
+sns.histplot(data=data, x=f'log_{target_feature}', kde=True, ax=ax[1])
+ax[1].set_title("After Log Transformation")
+
+plt.show()
+
+# %%
+target_feature = "lowest_monthly_earnings"
+standard_scaler = StandardScaler()
+data[f"standardized_{target_feature}"] = standard_scaler.fit_transform(data[[target_feature]])
+
+feature_original = data[target_feature]
+feature_standardized = data[f"standardized_{target_feature}"]
+
+print(f"평균(mean) 비교 = {feature_original.mean():.7} --> {feature_standardized.mean():.7}")
+print(f"표준편차(std) 비교= {feature_original.std():.7} --> {feature_standardized.std():.7}")
+
+# %%
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(15, 6))
+
+sns.histplot(data=data, x=target_feature, kde=True, ax=ax[0])
+ax[0].set_title("Before Standardization")
+
+sns.histplot(data=data, x=f"standardized_{target_feature}", kde=True, ax=ax[1])
+ax[1].set_title("After Standardization")
+
+plt.show()
+
+# %%
+target_feature = "lowest_monthly_earnings"
+normalized_scaler = MinMaxScaler()
+data[f"normalized_{target_feature}"] = normalized_scaler.fit_transform(data[[target_feature]])
+
+feature_original = data[target_feature]
+feature_normalized = data[f"normalized_{target_feature}"]
+
+print(f"최소값(min) 비교 = {feature_original.min():.7} --> {feature_normalized.min():.7}")
+print(f"최대값(max) 비교 = {feature_original.max():.7} --> {feature_normalized.max():.7}")
+
+# %%
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(15, 6))
+
+sns.histplot(data=data, x=target_feature, kde=True, ax=ax[0])
+ax[0].set_title("Before Normalization")
+
+sns.histplot(data=data, x=f"normalized_{target_feature}", kde=True, ax=ax[1])
+ax[1].set_title("After Normalization")
+
+plt.show()
