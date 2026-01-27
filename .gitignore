@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,python,jupyternotebooks,vim
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,python,jupyternotebooks,vim
+# Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux,python,vim,jupyternotebooks
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,python,vim,jupyternotebooks
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
@@ -29,6 +29,39 @@ ipython_config.py
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -248,4 +281,4 @@ $RECYCLE.BIN/
 # Ignoring Sandbox folder
 sandbox/
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,linux,python,jupyternotebooks,vim
+# End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,python,vim,jupyternotebooks
