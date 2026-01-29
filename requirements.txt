@@ -62,7 +62,6 @@ notebook==7.5.3
 notebook_shim==0.2.4
 numpy==1.26.0
 overrides==7.7.0
-packaging @ file:///home/task_176104885106445/conda-bld/packaging_1761049078006/work
 pandas==2.2.2
 pandocfilters==1.5.1
 parso==0.8.5
